@@ -25,9 +25,16 @@ body {
     line-height: 1.25;  
    }
 
-  .resize {
-    display: inline;
+  .uvStyle {
+    color: white;
   }
+
+  main {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    margin-bottom: 10px;
+}
 /* 
 
    body {

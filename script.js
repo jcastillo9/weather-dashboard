@@ -28,6 +28,7 @@ function fetchData(event){
             var timeEl= time
             var cityEl = document.createElement('h3');
             cityEl.textContent = weatherData.name + "(" + timeEl + ")";
+            var currentTemp =document.body.children[1].children[1].children[0].children[0]
             currentTemp.append(cityEl);
 
             var icon = document.createElement('img')
@@ -73,6 +74,7 @@ function fetchData(event){
                 var cityUv = document.createElement('p');
                 var uvIndex = uvData.current.uvi
                 cityUv.textContent = " UV Index: " + uvIndex;
+                var currentTemp =document.body.children[1].children[1].children[0]
                 currentTemp.append(cityUv);
                 cityUv.classList.add("uvStyle")
                 var uvSyleEl = document.querySelector(".uvStyle")
@@ -87,12 +89,43 @@ function fetchData(event){
 
                 // 5-day forecast
                 // date
-                
+                var card = document.body.children[1].children[1].children[1].children[1].children[i]
+                for (var i=0; i <5; i++){
+                    var day = document.createElement('h5')
+                    var unix = uvData.daily[i+1].dt
+                    var date = new Date(unix*1000)
+                    var date0 = date.toLocaleDateString("en-US")
+                    day.textContent = date0
+                    var card = document.body.children[1].children[1].children[1].children[1].children[i]
+                    card.appendChild(day)
+                }
+                // icon
+                for (var i=0; i<5;i++) {
+                    var icon = document.createElement('img')
+                    icon.src = 'https://openweathermap.org/img/wn/' + uvData.daily[i+1].weather[0].icon +'@2x.png'
+                    document.body.children[1].children[1].children[1].children[1].children[i].appendChild(icon)
+                    icon.classList.add("iconStyle")
+                }
+                // temp
+                for (var i=0;i<5;i++) {
+                    var temp = document.createElement('p')
+                    temp.textContent = "Temp: " + uvData.daily[i+1].temp.day + '\xB0'
+                    document.body.children[1].children[1].children[1].children[1].children[i].appendChild(temp)
+                }
+                // wind
+                for (var i=0;i<5;i++) {
+                    var wind = document.createElement('p')
+                    wind.textContent = "Wind: "+ uvData.daily[i+1].wind_speed + " MPH"
+                    document.body.children[1].children[1].children[1].children[1].children[i].appendChild(wind)
+                }
+                // humidity 
+                for (var i=0;i<5;i++) {
+                    var humidity = document.createElement('p')
+                    humidity.textContent= "Humidity: "+ uvData.daily[i+1].humidity +"%"
+                    document.body.children[1].children[1].children[1].children[1].children[i].appendChild(humidity)
+                }
             })
         }
 
         button.addEventListener("click", fetchData)
         button.addEventListener("click", fetchForecastData)
-
-
-  
