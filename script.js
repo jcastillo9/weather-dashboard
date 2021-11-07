@@ -15,7 +15,11 @@ function fetchData(event){
                 return response.json();
             })
             .then(function (weatherData) {
-                console.log(weatherData);
+                console.log("weather", weatherData);
+
+            var name = weatherData.name
+            console.log("name", name)
+            localStorage.setItem("name", JSON.stringify(name))
 
             var time = moment().format("MM/DD/YYYY");
             var timeEl= time
@@ -50,6 +54,14 @@ function fetchData(event){
             forecastFetch()
             })
         }
+
+        function fetchForecastData(event) {
+            event.preventDefault();
+
+            var name2 = JSON.parse(localStorage.getItem("name"))
+            console.log("name2", name2)
+        }
+
         button.addEventListener("click", fetchData);
 
 
