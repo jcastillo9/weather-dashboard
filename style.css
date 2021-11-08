@@ -36,109 +36,18 @@ body {
     align-items: stretch;
     margin-bottom: 10px;
 }
-/* 
+.history-btn{
+  background-color: cornflowerblue;
+  border: none;
+  outline: none;
+  width: 100%;
+  color: white;
+  display: block;
+  margin: 3px;
+  border-radius: 5px;
+}
 
-   body {
-    background-color: #537dcc;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+.card {
+  background-color: rgb(54, 59, 104);
+  color: white;
 }
-header {
-    display: flex;
-    justify-content: center;
-    background-color: #154a99;
-    color: #f0ffff;
-    margin-bottom: 20px;
-    padding-top: 10px;
-}
-main {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: stretch;
-    margin-bottom: 10px;
-}
-aside {
-    background-color: #e8e9fa;
-    display: flex;
-    flex-direction: column;
-    border-radius: 10px;
-    justify-content: space-evenly;
-    padding-bottom: 10px;
-}
-.cityList {
-    display: flex;
-    flex-direction: column;
-}
-.row{
-    padding-left: 10px;
-}
-form {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-}
-label {
-    font-size: 20px;
-    font-weight: 700;
-}
-.btnSearch {
-    background-color: #4b80cf;
-    color:#f0ffff;
-
-}
-.btnClear {
-    background-color: #aac7f3;
-    color: #000000;
-}
-button {
-    padding: 5px;
-    margin: 10px;
-    border-radius: 5px;
-    background-color: #6e97d3;
-    color:#f0ffff;
-    font-weight: 500;
-}
-.mainCity {
-    background-color: #e8e9fa;
-    border-radius: 10px;
-    padding: 5px;
-    padding-left: 20px;
-    padding-top: 10px;
-}
-h3 {
-    color:#f0ffff;
-    font-weight: 700;
-    margin-top: 10px;
-    margin-left: 30px;
-}
-.card{
-    background-color: #e8e9fa;
-    padding-bottom: 10px;
-}
-.uvStyle {
-    width: fit-content;
-    padding: 10px;
-    color:#f0ffff;
-}
-.iconStyle {
-    background-color: #9cb3d6; 
-    border-radius: 20px;
-    margin-bottom: 7px;
-}
-.line{
-    display: flex;
-    padding-right: 20px;
-}
-footer {
-    background-color: #154a99;
-    color:#f0ffff;
-    padding: 30px;
-    bottom:0;
-    width: 100%;
-}
-.btnClear:hover{
-    background-color: #811818;
-    color: #fff5ee;
-}
-button:hover{
-    background-color: #4169e1;
-} */
