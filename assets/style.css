@@ -7,14 +7,13 @@ body {
     color: white;
     padding: 10px; 
   }  
-  
-  .custom-btn{
-    background-color: cornflowerblue;
-    border: none;
-    outline: none;
-    width: 100%;
-    color: white;
-  }
+
+  main {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    margin-bottom: 10px;
+  }   
 
   h1,
   h2,
@@ -25,29 +24,32 @@ body {
     margin: 0;
     line-height: 1.25;  
    }
+  
+  .custom-btn{
+    background-color: cornflowerblue;
+    border: none;
+    outline: none;
+    width: 100%;
+    color: white;
+  }
+
+  .history-btn{
+    background-color: cornflowerblue;
+    border: none;
+    outline: none;
+    width: 100%;
+    color: white;
+    display: block;
+    margin: 3px;
+    border-radius: 5px;
+  }
 
   .uvStyle {
     color: white;
   }
 
-  main {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: stretch;
-    margin-bottom: 10px;
-}
-.history-btn{
-  background-color: cornflowerblue;
-  border: none;
-  outline: none;
-  width: 100%;
-  color: white;
-  display: block;
-  margin: 3px;
-  border-radius: 5px;
-}
-
-.card {
-  background-color: rgb(54, 59, 104);
-  color: white;
-}
+  .card {
+    background-color: rgb(54, 59, 104);
+    color: white;
+  }
+  
