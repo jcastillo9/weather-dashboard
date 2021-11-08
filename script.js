@@ -1,10 +1,16 @@
-var inputField = document.querySelector('#search');
-var button = document.querySelector('#searchCity');
-var currentTemp = document.querySelector('#currentCityTemp');
-var forecastDisplay = document.querySelector('#forecast');
+var inputField = document.getElementById('search');
+var button = document.getElementById('searchCity');
+var searchHistoryList = document.getElementById('search-history-list');
+var currentTemp = document.getElementById('currentCityTemp');
+var forecastDisplay = document.getElementById('forecast');
+var pastSearchesEl = localStorage.getItem('history') || '[]';
+var pastSearches = JSON.parse(pastSearchesEl);
+button.addEventListener("click", fetchData)
+button.addEventListener("click", fetchForecastData)
+button.addEventListener("click", historyData)
 
 function fetchData(event){
-        event.preventDefault();
+    event.preventDefault();
         var cityName = inputField.value
         var apiKey = 'fd531081518e808eb0375251a19ac935'
         var requestUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&appid=' + apiKey
@@ -31,10 +37,14 @@ function fetchData(event){
             var currentTemp =document.body.children[1].children[1].children[0].children[0]
             currentTemp.append(cityEl);
 
+            var cityName = weatherData.name
+            console.log("cityName", cityName)
+            localStorage.setItem("cityName", JSON.stringify(cityName))
+
             var icon = document.createElement('img')
             icon.src= 'https://openweathermap.org/img/wn/' + weatherData.weather[0].icon + '@2x.png'
-            var currentTempIcon = document.body.children[1].children[1].children[0] 
-            currentTemp.appendChild(icon)
+            var currentTemp = document.body.children[1].children[1].children[0] 
+            cityEl.appendChild(icon)
 
             var cityTemp = document.createElement('p');
             cityTemp.textContent = " Temp: " + ((weatherData.main.temp_max - 273) * 1.8 + 32).toFixed(2) +  "\u2109";
@@ -49,11 +59,35 @@ function fetchData(event){
             currentTemp.append(cityHumidity);
 
             inputField.value = "";
-
+            resetContent();
+          
             })
         }
 
-        function fetchForecastData() {
+        // function saveCity(cityName) {
+        //     if (inputField.value === '' || pastSearches.includes(cityName)) return;
+        //     makeNewBtn(cityName)
+        //     inputField.value = '';
+        
+        //     pastSearches.push(cityName);
+        //     localStorage.setItem('history', JSON.stringify(pastSearches));
+        // }
+function historyData(){
+           
+    var cityName2 = JSON.parse(localStorage.getItem("cityName"))
+    console.log("cityName2", cityName2)
+    var newBtn = document.createElement('button')
+    newBtn.setAttribute('class', 'history-btn')
+    newBtn.textContent = cityName2;
+    searchHistoryList .append(newBtn);
+    newBtn.addEventListener('click', function (event) {
+    event.preventDefault;
+    fetchData(newBtn.textContent);
+            })
+        }
+
+    
+function fetchForecastData() {
 
             var lat2 = JSON.parse(localStorage.getItem("lat"))
             console.log("lat2", lat2)
@@ -91,7 +125,7 @@ function fetchData(event){
                 // date
                 var card = document.body.children[1].children[1].children[1].children[1].children[i]
                 for (var i=0; i <5; i++){
-                    var day = document.createElement('h5')
+                    var day = document.createElement('h4')
                     var unix = uvData.daily[i+1].dt
                     var date = new Date(unix*1000)
                     var date0 = date.toLocaleDateString("en-US")
@@ -124,8 +158,10 @@ function fetchData(event){
                     humidity.textContent= "Humidity: "+ uvData.daily[i+1].humidity +"%"
                     document.body.children[1].children[1].children[1].children[1].children[i].appendChild(humidity)
                 }
+          
             })
         }
+        
+        
 
-        button.addEventListener("click", fetchData)
-        button.addEventListener("click", fetchForecastData)
+        button.addEventListener("click", resetContent)
