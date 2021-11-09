@@ -170,4 +170,4 @@ function fetchForecastData(event) {
 //     historyBtn.setAttribute('class', 'history-btn')
 //     historyBtn.textContent = cityName2;
 //     historyDisplay.append(historyBtn);
-//                 }       
+//                 }   
