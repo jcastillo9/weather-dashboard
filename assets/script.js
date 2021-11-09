@@ -77,7 +77,9 @@ function fetchData(event){
  //forecast data   
 function fetchForecastData(event) {
     event.preventDefault()
-    document.body.children[1].children[1].children[1].children[0].innerHTML = ''
+    for (var i=0; i <5; i++){
+    document.body.children[1].children[1].children[1].children[1].children[i].innerHTML = ''
+    }
 
             //lat and lon grabbing local storage from previous function
             var lat2 = JSON.parse(localStorage.getItem("lat"))
