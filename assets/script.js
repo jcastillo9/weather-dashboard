@@ -67,8 +67,6 @@ function fetchData(event) {
             //clears input field
             inputField.value = "";
 
-            fetchForecastData(event)
-
         })
 }
 
@@ -157,33 +155,33 @@ function fetchForecastData(event) {
 }
 
 //buttons in history container
-function historyData(){
+// function historyData(){
 
-    var cityName = inputField.value
-    var apiKey = 'fd531081518e808eb0375251a19ac935'
-    var requestUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&appid=' + apiKey
+//     var cityName = inputField.value
+//     var apiKey = 'fd531081518e808eb0375251a19ac935'
+//     var requestUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&appid=' + apiKey
 
-    //fetch request for weather data
-    fetch(requestUrl)
-        .then(function (response) {
-            return response.json();
-        })
-        .then(function (weatherData) {
-            console.log("weather", weatherData);
+//     //fetch request for weather data
+//     fetch(requestUrl)
+//         .then(function (response) {
+//             return response.json();
+//         })
+//         .then(function (weatherData) {
+//             console.log("weather", weatherData);
 
-    var cityName2 = weatherData.name
+//     var cityName2 = weatherData.name
 
-    var historyBtn = document.createElement('button')
-    historyBtn.setAttribute('class', 'history-btn')
-    historyBtn.textContent = cityName2;
-    historyDisplay.append(historyBtn);
+//     var historyBtn = document.createElement('button')
+//     historyBtn.setAttribute('class', 'history-btn')
+//     historyBtn.textContent = cityName2;
+//     historyDisplay.append(historyBtn);
 
-    historyBtn.addEventListener('click', function () {
-        fetchData();
-    })
-})
-}
+//     historyBtn.addEventListener('click', function () {
+//         fetchData();
+//     })
+// })
+// }
 
 button.addEventListener("click", fetchData)
 button.addEventListener("click", fetchForecastData)
-button.addEventListener("click", historyData)
+// button.addEventListener("click", historyData)
