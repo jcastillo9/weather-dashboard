@@ -3,7 +3,8 @@ var button = document.getElementById('searchCity');
 var historyDisplay = document.getElementById('search-history-list');
 var currentTemp = document.getElementById('currentCityTemp');
 var forecastDisplay = document.getElementById('forecast');
-var fetchData
+var weatherData
+var cityName
 
 //weather data
 function fetchData(event) {
@@ -11,7 +12,7 @@ function fetchData(event) {
     document.body.children[1].children[1].children[0].innerHTML = ''
     var cityName = inputField.value
     var apiKey = 'fd531081518e808eb0375251a19ac935'
-    var requestUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&appid=' + apiKey
+    var requestUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&units=imperial&appid=' + apiKey
 
     //fetch request for weather data
     fetch(requestUrl)
@@ -51,7 +52,7 @@ function fetchData(event) {
 
             //current city temp
             var cityTemp = document.createElement('p');
-            cityTemp.textContent = " Temp: " + ((weatherData.main.temp_max - 273) * 1.8 + 32).toFixed(2) + "\u2109";
+            cityTemp.textContent = " Temp: " + ((weatherData.main.temp_max) + "\u2109");
             currentTemp.append(cityTemp);
 
             //wind
@@ -66,7 +67,7 @@ function fetchData(event) {
 
             //clears input field
             inputField.value = "";
-
+            fetchForecastData(event)
         })
 }
 
@@ -76,8 +77,7 @@ function fetchForecastData(event) {
     for (var i = 0; i < 5; i++) {
         document.body.children[1].children[1].children[1].children[1].children[i].innerHTML = ''
     }
-
-    //lat and lon grabbing local storage from previous function
+    //fetch request for weather data
     var lat2 = JSON.parse(localStorage.getItem("lat"))
     console.log("lat2", lat2)
 
@@ -94,6 +94,13 @@ function fetchForecastData(event) {
         })
         .then(function (uvData) {
             console.log(uvData)
+
+
+            var lon = uvData.current.lon
+            console.log("lon", lon)
+
+            var lat = uvData.current.lat
+            console.log("lat", lat)
 
             //appending UV Index to the currentTemp container
             var cityUv = document.createElement('p');
@@ -134,7 +141,7 @@ function fetchForecastData(event) {
             // temp
             for (var i = 0; i < 5; i++) {
                 var temp = document.createElement('p')
-                temp.textContent = "Temp: " + uvData.daily[i + 1].temp.day + '\xB0'
+                temp.textContent = "Temp: " + uvData.daily[i + 1].temp.day + "\u2109"
                 document.body.children[1].children[1].children[1].children[1].children[i].appendChild(temp)
             }
             // wind
@@ -151,37 +158,39 @@ function fetchForecastData(event) {
             }
 
 
-        })
+        });
 }
 
 //buttons in history container
-// function historyData(){
+function historyData(){
 
-//     var cityName = inputField.value
-//     var apiKey = 'fd531081518e808eb0375251a19ac935'
-//     var requestUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&appid=' + apiKey
+    var cityName = inputField.value
+    var apiKey = 'fd531081518e808eb0375251a19ac935'
+    var requestUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&appid=' + apiKey
 
-//     //fetch request for weather data
-//     fetch(requestUrl)
-//         .then(function (response) {
-//             return response.json();
-//         })
-//         .then(function (weatherData) {
-//             console.log("weather", weatherData);
+    //fetch request for weather data
+    fetch(requestUrl)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (weatherData) {
+            console.log("weather", weatherData);
 
-//     var cityName2 = weatherData.name
+    var cityName2 = weatherData.name
 
-//     var historyBtn = document.createElement('button')
-//     historyBtn.setAttribute('class', 'history-btn')
-//     historyBtn.textContent = cityName2;
-//     historyDisplay.append(historyBtn);
+    var historyBtn = document.createElement('button')
+    historyBtn.setAttribute('class', 'history-btn')
+    historyBtn.style.width = '100'
+    historyBtn.textContent = cityName2;
+    historyDisplay.append(historyBtn);
 
-//     historyBtn.addEventListener('click', function () {
-//         fetchData();
-//     })
-// })
-// }
+    historyBtn.addEventListener("click", runHistory)
+})
+}
 
+function runHistory() {
+    fetchData(weatherData, cityName);
+}
+// button.addEventListener("click", fetchForecastData)
+button.addEventListener("click", historyData)
 button.addEventListener("click", fetchData)
-button.addEventListener("click", fetchForecastData)
-// button.addEventListener("click", historyData)

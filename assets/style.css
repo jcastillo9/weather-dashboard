@@ -44,6 +44,10 @@ body {
     border-radius: 5px;
   }
 
+  .history-btn:hover {
+    background-color: rgb(54, 59, 104);
+  }
+
   .uvStyle {
     color: white;
     width: 90px;
