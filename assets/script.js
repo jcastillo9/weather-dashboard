@@ -3,20 +3,17 @@ var button = document.getElementById('searchCity');
 var historyDisplay = document.getElementById('search-history-list');
 var currentTemp = document.getElementById('currentCityTemp');
 var forecastDisplay = document.getElementById('forecast');
-var pastSearchesEl = localStorage.getItem('history') || '[]';
-var card = document.getElementById('#card-body')
-var pastSearches = JSON.parse(pastSearchesEl);
-var fiveDayEl = document.getElementById('fiveDay');
+
+
 button.addEventListener("click", fetchData)
 button.addEventListener("click", fetchForecastData)
-button.addEventListener("click", historyData)
-button.addEventListener("click", resetPage)
+// button.addEventListener("click", historyData)
 
 
 //weather data
-function fetchData(){
+function fetchData(event){
     event.preventDefault()
-  
+    document.body.children[1].children[1].children[0].innerHTML = ''
         var cityName = inputField.value
         var apiKey = 'fd531081518e808eb0375251a19ac935'
         var requestUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&appid=' + apiKey
@@ -47,7 +44,7 @@ function fetchData(){
             var timeEl= time
             var cityEl = document.createElement('h3');
             cityEl.textContent = weatherData.name + "(" + timeEl + ")";
-            var currentTemp =document.body.children[1].children[1].children[0]
+            var currentTemp = document.body.children[1].children[1].children[0]
             currentTemp.append(cityEl);
 
             //icon
@@ -73,15 +70,14 @@ function fetchData(){
 
             //clears input field
             inputField.value = "";
-            resetPage();
+
             })
         }
-        function resetPage() {
-            inputField.textContent = '';
-            // removeForecastEls();
-        } 
+    
  //forecast data   
-function fetchForecastData() {
+function fetchForecastData(event) {
+    event.preventDefault()
+    document.body.children[1].children[1].children[1].children[0].innerHTML = ''
 
             //lat and lon grabbing local storage from previous function
             var lat2 = JSON.parse(localStorage.getItem("lat"))
@@ -155,39 +151,23 @@ function fetchForecastData() {
                     humidity.textContent= "Humidity: "+ uvData.daily[i+1].humidity +"%"
                     document.body.children[1].children[1].children[1].children[1].children[i].appendChild(humidity)
                 }
+                
           
             })
         }
-        // // Saves city name in history
-        // function saveCity(cityName) {
-        //     if (inputField.value === '' || pastSearches.includes(cityName)) return;
-        //     historyData(cityName)
-        //     inputField.value = '';
 
-        //     pastSearches.push(cityName);
-        //     localStorage.setItem('history', JSON.stringify(pastSearches));
-        // }
+// function removeForecastEls() {
+//     for (var i=0;i<5;i++) {
+//         document.body.children[1].children[1].children[1].children[1].children[i].removeChild(fiveDayEl.children[i])
+//             }
+//         }
 
-        function historyData(){
-           
-            var cityName2 = JSON.parse(localStorage.getItem("cityName"))
-            console.log("cityName2", cityName2)
+// function historyData(){
+//     var cityName2 = JSON.parse(localStorage.getItem("cityName"))
+//     console.log("cityName2", cityName2)
         
-            var historyBtn = document.createElement('button')
-            historyBtn.setAttribute('class', 'history-btn')
-            historyBtn.textContent = cityName2;
-            historyDisplay.append(historyBtn);
-                }
-
-        // Populates history section with city names saved in local storage
-        function populateHistory() {
-            for (var i = 0; i < pastSearches.length; i++) {
-                historyData(pastSearches[i]);
-            }
-        }
-        
-
-        button.addEventListener("click", resetPage)
-        button.addEventListener("click", saveCity)
-        historyBtn.addEventListener('click', fetchData())
-       
+//     var historyBtn = document.createElement('button')
+//     historyBtn.setAttribute('class', 'history-btn')
+//     historyBtn.textContent = cityName2;
+//     historyDisplay.append(historyBtn);
+//                 }       
