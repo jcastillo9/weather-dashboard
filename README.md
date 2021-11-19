@@ -30,3 +30,11 @@ Run using the github URL: https://jcastillo9.github.io/weather-dashboard/
 
 # Screenshot
 <img src="assets/images/weather_dashboard.png"/>
+
+## Credits
+ 
+Lead Developer - Janette Castillo (janette.castillo91@yahoo.com)
+
+# License
+ 
+The MIT License (MIT)
